@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld />
+      <Index-vue></Index-vue>
     </v-main>
   </v-app>
 </template>
 
 <script setup>
-  //
+
 </script>
