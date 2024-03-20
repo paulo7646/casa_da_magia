@@ -10,7 +10,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue'
 
 //pages
-import index from './components/index.vue';
+import index from './components/pages/index.vue';
 
 //rotas
 const router = createRouter({
