@@ -1,12 +1,12 @@
 <template>
     <v-data-iterator style="margin: 2%;"
-      :items="mice"
+      :items="items"
       :items-per-page="itemsPerPage"
       :search="search"
     >
       <template v-slot:header="{ page, pageCount, prevPage, nextPage }">
         <h1 class="text-h4 font-weight-bold d-flex justify-space-between mb-4 align-center">
-
+          
           <div style="width: 50%;" class="d-flex align-center">
             <v-text-field
                   v-model="search"
@@ -22,7 +22,7 @@
   
           <div class="d-flex align-center">
             <v-btn class="me-1">
-              <span class="text-none">Total: {{ mice.length }}</span>
+              <span class="text-none">Total: {{ items.length }}</span>
             </v-btn>
             <v-btn class="me-1">
                 <span class="text-none"> Page {{ page }} of {{ pageCount }}</span>
@@ -57,29 +57,38 @@
             sm="3"
             xl="3"
           >
-            <v-sheet border>
-              <v-img
+
+          <v-card elevation="24">
+            <v-img v-if="item.raw.src != null && item.raw.src != '' "
                 :gradient="`to top right, rgba(255, 255, 255, .1), rgba(${item.raw.color}, .15)`"
-                :src="item.raw.src"
+                :src="item.raw.src "
                 height="150"
                 cover
-              ></v-img>
-  
-              <v-list-item
+            ></v-img>
+            
+            <v-img v-else
+                :gradient="`to top right, rgba(255, 255, 255, .1), rgba(${item.raw.color}, .15)`"
+                src="/src/assets/produto-nao-encontrado.png"
+                height="150"
+                cover
+            ></v-img>
+
+            <v-list-item
                 :title="item.raw.name"
                 density="comfortable"
                 lines="two"
-                subtitle="Lorem ipsum dil orei namdie dkaf"
               >
                 <template v-slot:title>
                   <strong class="text-h6">
                     {{ item.raw.name }}
                   </strong>
                 </template>
+            </v-list-item>
+
+          </v-card>
 
 
-              </v-list-item>
-            </v-sheet>
+
           </v-col>
         </v-row>
       </template>
@@ -92,7 +101,7 @@
       return {
         search: '',
         itemsPerPage: 10,
-        mice: [
+        items: [
           {
             name: 'Logitech G Pro X',
             color: '14, 151, 210',
@@ -102,7 +111,7 @@
             wireless: true,
             price: 149.99,
             description: 'Logitech G Pro X',
-            src: 'https://cdn.vuetifyjs.com/docs/images/graphics/mice/1.png',
+            src: null,
           },
           {
             name: 'Razer DeathAdder V2',
@@ -263,7 +272,7 @@
     },
     methods: {
       onClickSeeAll () {
-        this.itemsPerPage = this.itemsPerPage === 4 ? this.mice.length : 4
+        this.itemsPerPage = this.itemsPerPage === 4 ? this.items.length : 4
       },
     },
   }
