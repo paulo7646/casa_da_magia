@@ -1,14 +1,23 @@
 <template>
-    <v-data-iterator
+    <v-data-iterator style="margin: 2%;"
       :items="mice"
       :items-per-page="itemsPerPage"
+      :search="search"
     >
       <template v-slot:header="{ page, pageCount, prevPage, nextPage }">
         <h1 class="text-h4 font-weight-bold d-flex justify-space-between mb-4 align-center">
 
-
-          <div class="d-flex align-center">
-            
+          <div style="width: 50%;" class="d-flex align-center">
+            <v-text-field
+                  v-model="search"
+                  density="comfortable"
+                  placeholder="Search"
+                  prepend-inner-icon="mdi-magnify"
+                  style="max-width: 300px;"
+                  variant="solo"
+                  clearable
+                  hide-details
+            ></v-text-field>
           </div>
   
           <div class="d-flex align-center">
@@ -67,66 +76,21 @@
                     {{ item.raw.name }}
                   </strong>
                 </template>
+
+
               </v-list-item>
-  
-              <v-table class="text-caption" density="compact">
-                <tbody>
-                  <tr align="right">
-                    <th>DPI:</th>
-  
-                    <td>{{ item.raw.dpi }}</td>
-                  </tr>
-  
-                  <tr align="right">
-                    <th>Buttons:</th>
-  
-                    <td>{{ item.raw.buttons }}</td>
-                  </tr>
-  
-                  <tr align="right">
-                    <th>Weight:</th>
-  
-                    <td>{{ item.raw.weight }}</td>
-                  </tr>
-  
-                  <tr align="right">
-                    <th>Wireless:</th>
-  
-                    <td>{{ item.raw.wireless ? 'Yes' : 'No' }}</td>
-                  </tr>
-  
-                  <tr align="right">
-                    <th>Price:</th>
-  
-                    <td>${{ item.raw.price }}</td>
-                  </tr>
-                </tbody>
-              </v-table>
             </v-sheet>
           </v-col>
         </v-row>
       </template>
-  
-      <template v-slot:footer="{ page, pageCount }">
-        <v-footer
-          class="justify-space-between text-body-2 mt-4"
-          color="surface-variant"
-        >
-  
-          <div>
-            Page {{ page }} of {{ pageCount }}
-          </div>
-        </v-footer>
-      </template>
     </v-data-iterator>
   </template>
-
-
 
   <script>
   export default {
     data () {
       return {
+        search: '',
         itemsPerPage: 10,
         mice: [
           {
