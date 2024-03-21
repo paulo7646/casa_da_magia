@@ -4,7 +4,6 @@
       <v-avatar size="70px" image="/src/assets/images/logo.png"></v-avatar>
       <span style="text-align: justify; margin-right: 1px;">Casa da Magia</span>
 
-
       <RouterLink class="router-link" to="/">
         <v-btn block class="btn-menu-fist" prepend-icon="mdi-home">Home</v-btn>
       </RouterLink>
